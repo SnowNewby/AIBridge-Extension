@@ -70,7 +70,6 @@ https://oauth.yandex.ru/verification_code
 3. Откройте страницу расширений:
    - Chrome и Chromium: `chrome://extensions`;
    - Microsoft Edge: `edge://extensions`;
-   - Brave: `brave://extensions`;
    - Яндекс Браузер: `browser://tune`.
 4. Включите **Режим разработчика**.
 5. Нажмите **Загрузить распакованное расширение**.
