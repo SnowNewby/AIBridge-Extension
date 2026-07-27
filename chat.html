@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Bridge</title>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <main class="app">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header"><div><div class="brand">AI Bridge</div><div class="subtitle">Чаты через Яндекс.Диск</div></div><button id="closeSidebarButton" class="icon-button mobile-only">×</button></div>
+      <button id="newChatButton" class="primary new-chat">＋ Новый чат</button>
+      <div id="chatList" class="chat-list"></div>
+      <div class="sidebar-footer"><div id="status" class="status offline"><span class="dot"></span><span id="statusText">Не подключено</span></div><button id="settingsButton" class="ghost">Настройки</button></div>
+    </aside>
+    <section class="workspace">
+    <header class="topbar">
+      <button id="openSidebarButton" class="icon-button mobile-only">☰</button>
+      <div class="chat-heading"><div id="chatTitle" class="current-title">Новый чат</div><div id="weeklyUsage" class="subtitle">За 7 дней: 0 запросов</div></div>
+      <select id="modeSelect" class="model-select mode-select" aria-label="Режим"><option value="normal">Обычный</option><option value="agent">Агент</option></select>
+      <select id="modelSelect" class="model-select" aria-label="Модель"><option value="">По умолчанию</option><option value="gpt-5.5">GPT-5.5</option><option value="gpt-5.6-sol">GPT-5.6 Sol</option><option value="gpt-5.6-terra">GPT-5.6 Terra</option><option value="gpt-5.6-luna">GPT-5.6 Luna</option></select>
+      <button id="clearButton" class="ghost">Очистить</button>
+    </header>
+
+    <section id="messages" class="messages">
+      <article class="message assistant">
+        <div class="role">Ассистент</div>
+        <div class="bubble">Готов. Войди через Яндекс в настройках, затем отправь сообщение.</div>
+      </article>
+    </section>
+
+    <section class="composer-wrap">
+      <div id="attachments" class="attachments"></div>
+      <div class="composer">
+        <label class="attach-button" title="Прикрепить файлы">
+          <input id="fileInput" type="file" multiple hidden>
+          📎
+        </label>
+        <textarea id="promptInput" rows="1" placeholder="Напиши сообщение…"></textarea>
+        <button id="sendButton" class="primary">Отправить</button>
+      </div>
+    </section>
+    </section>
+  </main>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <div>
+          <h2>Настройки</h2>
+          <p>OAuth и проверка Яндекс.Диска</p>
+        </div>
+        <button value="cancel" class="icon-button" aria-label="Закрыть">×</button>
+      </div>
+
+      <div class="setting-block">
+        <div class="setting-title">Yandex OAuth</div>
+        <div id="clientIdWarning" class="warning hidden">Client ID не задан. Открой <code>config.js</code> и вставь его в <code>YANDEX_CLIENT_ID</code>.</div>
+        <div class="auth-row">
+          <span id="authState" class="badge">Не авторизован</span>
+          <span id="userName" class="muted"></span>
+        </div>
+        <div class="button-row">
+          <button id="loginButton" type="button" class="primary">Войти через Яндекс</button>
+          <button id="logoutButton" type="button" class="danger">Выйти</button>
+          <button id="testButton" type="button" class="ghost">Проверить и создать папки</button>
+        </div>
+      </div>
+
+      <div class="setting-block">
+        <label>Имя этого клиента</label>
+        <input id="clientNameInput" placeholder="office-pc">
+        <p class="setting-hint">ID диалога создаётся автоматически для каждого чата.</p>
+        <label for="weeklyLimitInput">Недельный лимит запросов</label>
+        <input id="weeklyLimitInput" type="number" min="0" step="1" placeholder="0 — только считать">
+        <p class="setting-hint">Локальный счётчик за скользящие 7 дней. Это не официальный остаток квоты ChatGPT.</p>
+      </div>
+
+      <div id="settingsResult" class="result"></div>
+      <div class="dialog-footer">
+        <button id="saveSettingsButton" type="button" class="primary">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="chat.js"></script>
+</body>
+</html>
